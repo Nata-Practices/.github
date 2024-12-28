@@ -38,10 +38,6 @@ readme_template = """
 
 ## 📂 Репозитории
 {repositories_section}
-
-<p align="center">
-  <sub>Автоматическая генерация — <code>cloc</code> + <code>GitHub API</code></sub>
-</p>
 """
 
 def format_languages_table(languages: dict) -> str:
