@@ -1,0 +1,43 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Ежедневно в полночь
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout with PAT
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.TKN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install PyGithub
+      
+    - name: Install cloc
+      run: sudo apt-get install -y cloc
+      
+    - name: Generate README stats
+      env:
+        TKN: ${{ secrets.TKN }}
+      run: python generate_readme.py
+      
+    - name: Log generated README
+      run: cat profile/README.md
+
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'Update README with latest stats'
+        branch: main
+      env:
+        GITHUB_TOKEN: ${{ secrets.TKN }}
