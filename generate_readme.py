@@ -26,10 +26,6 @@ readme_template = """
   <img src="https://img.shields.io/badge/Total Files-{total_files}-yellow?style=for-the-badge" alt="Total Files" />
 </p>
 
-<p align="center">
-  <em>Автоматическая статистика по репозиториям, языкам и размеру кода. Обновляется при каждом запуске скрипта.</em>
-</p>
-
 ## 🌐 Языки
 {languages_section}
 
