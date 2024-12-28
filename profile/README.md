@@ -3,8 +3,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Репозиториев-6-blue?style=for-the-badge" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Строк кода-19592-brightgreen?style=for-the-badge" alt="Total Lines" />
-  <img src="https://img.shields.io/badge/Файлов-156-yellow?style=for-the-badge" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Строк кода-20079-brightgreen?style=for-the-badge" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Файлов-170-yellow?style=for-the-badge" alt="Total Files" />
 </p>
 
 ## 🌐 Языки
@@ -12,15 +12,15 @@
 |------|------------|
 | Python | 52105 |
 | C# | 102848 |
-| Kotlin | 10980 |
+| Kotlin | 19381 |
 | Java | 24164 |
 
 <hr/>
 
 ## 📊 Общая статистика
 - **Репозиториев**: 6
-- **Всего строк кода**: 19592
-- **Всего файлов**: 156
+- **Всего строк кода**: 20079
+- **Всего файлов**: 170
 
 ## 📂 Репозитории
 | Репозиторий | Язык | Строк кода | Файлов |
@@ -29,5 +29,5 @@
 | [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | C# | 12295 | 45 |
 | [UserService](https://github.com/Nata-Practices/UserService) | C# | 2672 | 31 |
 | [APIGateway](https://github.com/Nata-Practices/APIGateway) | C# | 1937 | 21 |
-| [drugstore](https://github.com/Nata-Practices/drugstore) | Kotlin | 943 | 29 |
+| [drugstore](https://github.com/Nata-Practices/drugstore) | Kotlin | 1430 | 43 |
 | [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | Java | 829 | 15 |
