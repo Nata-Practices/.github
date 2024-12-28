@@ -19,10 +19,6 @@ g = Github(GITHUB_TOKEN)
 org = g.get_organization(ORG_NAME)
 
 readme_template = """
-# 🎓 Nata Practices
-
-Автоматическая статистика репозиториев.
-
 ## 📊 Общая статистика
 - **Репозиториев**: {repo_count}
 - **Языков**:
@@ -43,7 +39,10 @@ total_files = 0
 for repo in org.get_repos():
     repo_count += 1
     repo_name = repo.name
-
+    
+    if repo_name == ".github-private":
+        continue
+        
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
         repo_clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
