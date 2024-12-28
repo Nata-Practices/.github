@@ -21,9 +21,9 @@ readme_template = """
 <h1 align="center">👋 Добро пожаловать в <strong>{org_name}</strong>!</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Repo Count-{repo_count}-blue?style=for-the-badge" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Total Lines-{total_lines}-brightgreen?style=for-the-badge" alt="Total Lines" />
-  <img src="https://img.shields.io/badge/Total Files-{total_files}-yellow?style=for-the-badge" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Репозиториев-{repo_count}-blue?style=for-the-badge" alt="Repo Count" />
+  <img src="https://img.shields.io/badge/Строк кода-{total_lines}-brightgreen?style=for-the-badge" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Файлов-{total_files}-yellow?style=for-the-badge" alt="Total Files" />
 </p>
 
 ## 🌐 Языки
