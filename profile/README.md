@@ -3,8 +3,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Репозиториев-6-blue?style=for-the-badge" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Строк кода-20092-brightgreen?style=for-the-badge" alt="Total Lines" />
-  <img src="https://img.shields.io/badge/Файлов-161-yellow?style=for-the-badge" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Строк кода-19592-brightgreen?style=for-the-badge" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Файлов-156-yellow?style=for-the-badge" alt="Total Files" />
 </p>
 
 ## 🌐 Языки
@@ -19,8 +19,8 @@
 
 ## 📊 Общая статистика
 - **Репозиториев**: 6
-- **Всего строк кода**: 20092
-- **Всего файлов**: 161
+- **Всего строк кода**: 19592
+- **Всего файлов**: 156
 
 ## 📂 Репозитории
 | Репозиторий | Язык | Строк кода | Файлов |
@@ -30,4 +30,4 @@
 | [UserService](https://github.com/Nata-Practices/UserService) | C# | 2672 | 31 |
 | [APIGateway](https://github.com/Nata-Practices/APIGateway) | C# | 1937 | 21 |
 | [drugstore](https://github.com/Nata-Practices/drugstore) | Kotlin | 943 | 29 |
-| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | Java | 1329 | 20 |
+| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | Java | 829 | 15 |
