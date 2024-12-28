@@ -7,47 +7,96 @@ from shutil import which
 import sys
 
 if not which("cloc"):
-    sys.exit(1)
+    sys.exit("cloc не установлен или не найден в PATH")
 
 GITHUB_TOKEN = os.getenv('TKN')
 if not GITHUB_TOKEN:
-    sys.exit(1)
+    sys.exit("Не задана переменная окружения TKN")
 
 ORG_NAME = "Nata-Practices"
-
 g = Github(GITHUB_TOKEN)
 org = g.get_organization(ORG_NAME)
 
 readme_template = """
+<h1 align="center">👋 Добро пожаловать в <strong>{org_name}</strong>!</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Repo Count-{repo_count}-blue?style=for-the-badge" alt="Repo Count" />
+  <img src="https://img.shields.io/badge/Total Lines-{total_lines}-brightgreen?style=for-the-badge" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Total Files-{total_files}-yellow?style=for-the-badge" alt="Total Files" />
+</p>
+
+<p align="center">
+  <em>Автоматическая статистика по репозиториям, языкам и размеру кода. Обновляется при каждом запуске скрипта.</em>
+</p>
+
+## 🌐 Языки
+{languages_section}
+
+<hr/>
+
 ## 📊 Общая статистика
 - **Репозиториев**: {repo_count}
-- **Языков**:
-{languages}
 - **Всего строк кода**: {total_lines}
 - **Всего файлов**: {total_files}
 
 ## 📂 Репозитории
-{repositories}
+{repositories_section}
+
+<p align="center">
+  <sub>Автоматическая генерация — <code>cloc</code> + <code>GitHub API</code></sub>
+</p>
 """
+
+def format_languages_table(languages: dict) -> str:
+    if not languages:
+        return "_Нет данных по языкам_"
+    
+    header = "| Язык | Кол-во байт |\n|------|------------|\n"
+    rows = []
+    for lang, size in languages.items():
+        rows.append(f"| {lang} | {size} |")
+    return header + "\n".join(rows)
+
+def format_repos_table(repos_info: list) -> str:
+    if not repos_info:
+        return "_Нет репозиториев_"
+
+    header = "| Репозиторий | Язык | Строк кода | Файлов |\n|-------------|------|------------|--------|\n"
+    rows = []
+    for r in repos_info:
+        row = (
+            f"| [{r['name']}]({r['html_url']}) "
+            f"| {r['language']} "
+            f"| {r['lines']} "
+            f"| {r['files']} |"
+        )
+        rows.append(row)
+
+    return header + "\n".join(rows)
 
 repo_count = 0
 languages = {}
-repositories = []
 total_lines = 0
 total_files = 0
+repos_info = []
 
 for repo in org.get_repos():
-    repo_count += 1
     repo_name = repo.name
     
+    # Пропускаем, если нужно
     if repo_name == ".github-private":
         continue
-        
+    
+    repo_count += 1
+    
+    # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
-        repo_clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
+        clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
+        
         clone_result = subprocess.run(
-            ["git", "clone", "--depth", "1", repo_clone_url, repo_dir],
+            ["git", "clone", "--depth", "1", clone_url, repo_dir],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
 
@@ -60,7 +109,6 @@ for repo in org.get_repos():
                 capture_output=True,
                 text=True
             ).stdout
-
             if lines_output.strip():
                 cloc_data = json.loads(lines_output)
                 total_lines_repo = cloc_data.get("SUM", {}).get("code", 0)
@@ -71,32 +119,42 @@ for repo in org.get_repos():
 
             total_lines += total_lines_repo
             total_files += total_files_repo
-
-        except Exception as e:
+        except:
             total_lines_repo = 0
             total_files_repo = 0
 
-    langs = repo.get_languages()
-    for lang, size in langs.items():
+    # Язык
+    primary_lang = repo.language or "N/A"
+
+    # Сбор языков
+    repo_langs = repo.get_languages()
+    for lang, size in repo_langs.items():
         languages[lang] = languages.get(lang, 0) + size
 
-    repositories.append(
-        f"- [{repo.name}]({repo.html_url}) "
-        f"({repo.language}): {total_lines_repo} строк кода, {total_files_repo} файлов"
-    )
+    repos_info.append({
+        "name": repo_name,
+        "html_url": repo.html_url,
+        "language": primary_lang,
+        "lines": total_lines_repo,
+        "files": total_files_repo
+    })
 
-languages_summary = "\n".join([f"  - {lang}: {size} байт" for lang, size in languages.items()])
-repositories_summary = "\n".join(repositories)
+# Формируем итоговый Markdown
+languages_section = format_languages_table(languages)
+repositories_section = format_repos_table(repos_info)
 
-output_path = os.path.join("profile", "README.md")
+output_text = readme_template.format(
+    org_name=ORG_NAME,
+    repo_count=repo_count,
+    total_lines=total_lines,
+    total_files=total_files,
+    languages_section=languages_section,
+    repositories_section=repositories_section
+)
+
 os.makedirs("profile", exist_ok=True)
+output_path = os.path.join("profile", "README.md")
 with open(output_path, "w", encoding="utf-8") as f:
-    f.write(readme_template.format(
-        repo_count=repo_count,
-        languages=languages_summary,
-        repositories=repositories_summary,
-        total_lines=total_lines,
-        total_files=total_files
-    ))
+    f.write(output_text)
 
-print(f"README.md обновлён!")
+print("README.md обновлён!")
