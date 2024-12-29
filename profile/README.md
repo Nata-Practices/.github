@@ -28,5 +28,5 @@
 | [UserService](https://github.com/Nata-Practices/UserService) | C# | 2672 | 31 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
 | [APIGateway](https://github.com/Nata-Practices/APIGateway) | C# | 1937 | 21 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
 | [drugstore](https://github.com/Nata-Practices/drugstore) | Kotlin | 1430 | 43 | 28.12.2024 | Simple mobile app with sorting and searching |
-| [infproc](https://github.com/Nata-Practices/infproc) | Python | 916 | 15 | 28.12.2024 | Graph project for Nata |
+| [infproc](https://github.com/Nata-Practices/infproc) | Python | 916 | 15 | 27.12.2024 | Graph project for Nata |
 | [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | Java | 829 | 15 | 28.12.2024 | Data management practices |
