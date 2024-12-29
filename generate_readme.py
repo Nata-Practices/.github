@@ -1,11 +1,11 @@
+import json
 import os
 import subprocess
-import tempfile
-import json
-from github import Github
-from shutil import which
 import sys
-from datetime import datetime
+import tempfile
+from shutil import which
+
+from github import Github
 from pytz import timezone
 
 moscow_tz = timezone("Europe/Moscow")
@@ -43,27 +43,42 @@ readme_template = """
 {repositories_section}
 """
 
-def format_languages_table(languages: dict) -> str:
-    if not languages:
+# Словарь с иконками для языков
+language_icons = {
+    "Python": '<img src="https://img.shields.io/badge/-000?logo=python&logoColor=white&style=flat-square" alt="Python">',
+    "C#": '<img src="https://img.shields.io/badge/-000?logo=c-sharp&logoColor=white&style=flat-square" alt="C#">',
+    "Kotlin": '<img src="https://img.shields.io/badge/-000?logo=kotlin&logoColor=white&style=flat-square" alt="Kotlin">',
+    "Java": '<img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java">',
+    "N/A": '<img src="https://img.shields.io/badge/-000?logo=code&logoColor=gray&style=flat-square" alt="Unknown">'
+}
+
+
+# Форматирование таблицы языков
+def format_languages_table(_languages: dict) -> str:
+    if not _languages:
         return "_Нет данных по языкам_"
-    
-    header = "| Язык | Кол-во байт |\n|------|------------|\n"
+
+    header = "| Язык         | Значок | Кол-во байт |\n|--------------|--------|-------------|\n"
     rows = []
-    for lang, size in languages.items():
-        rows.append(f"| {lang} | {size} |")
+    for _lang, _size in _languages.items():
+        icon = language_icons.get(lang, language_icons["N/A"])
+        rows.append(f"| {_lang} | {icon} | {_size} |")
     return header + "\n".join(rows)
 
-def format_repos_table(repos_info: list) -> str:
-    if not repos_info:
+
+# Форматирование таблицы репозиториев
+def format_repos_table(_repos_info: list) -> str:
+    if not _repos_info:
         return "_Нет репозиториев_"
 
-    header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
-    header += "|-------------|------|------------|--------|------------------|----------|\n"
+    header = "| Репозиторий | Язык (Иконка) | Строк кода | Файлов | Последний коммит | Описание |\n"
+    header += "|-------------|---------------|------------|--------|------------------|----------|\n"
     rows = []
-    for r in repos_info:
+    for r in _repos_info:
+        icon = language_icons.get(r['language'], language_icons["N/A"])
         row = (
             f"| [{r['name']}]({r['html_url']}) "
-            f"| {r['language']} "
+            f"| {icon} {r['language']} "
             f"| {r['lines']} "
             f"| {r['files']} "
             f"| {r['last_commit']} "
@@ -73,6 +88,8 @@ def format_repos_table(repos_info: list) -> str:
 
     return header + "\n".join(rows)
 
+
+# Основная логика
 repo_count = 0
 languages = {}
 total_lines = 0
@@ -86,11 +103,11 @@ doc_coverage = 0
 
 for repo in org.get_repos(type="private"):
     repo_name = repo.name
-    
+
     # Пропускаем, если нужно
     if repo_name == ".github-private":
         continue
-    
+
     repo_count += 1
     total_storage += repo.size / 1024  # Перевод размера в MB
 
@@ -102,14 +119,14 @@ for repo in org.get_repos(type="private"):
     try:
         last_commit_date = repo.get_commits()[0].commit.committer.date
         last_commit_date = last_commit_date.astimezone(moscow_tz).strftime("%d.%m.%Y")
-    except GithubException:
+    except:
         last_commit_date = "Нет данных"
-        
+
     # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
         clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
-        
+
         clone_result = subprocess.run(
             ["git", "clone", "--depth", "1", clone_url, repo_dir],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE
@@ -134,10 +151,6 @@ for repo in org.get_repos(type="private"):
 
             total_lines += total_lines_repo
             total_files += total_files_repo
-
-            # Уровень документации (README.md)
-            if os.path.exists(os.path.join(repo_dir, "README.md")):
-                doc_coverage += 1
 
         except:
             total_lines_repo = 0
@@ -169,7 +182,7 @@ for repo in org.get_repos(type="private"):
     })
 
 repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
-    
+
 # Формируем итоговый Markdown
 languages_section = format_languages_table(languages)
 repositories_section = format_repos_table(repos_info)
