@@ -65,10 +65,10 @@ def format_languages_table(_languages: dict) -> str:
     header += "|---|------|-----------------------|-------------|\n"
 
     rows = []
-    for rank, (_lang, _size) in enumerate(sorted_languages, start=1):
+    for rank, (_lang, _lines) in enumerate(sorted_languages, start=1):
         icon = language_icons.get(_lang, language_icons["N/A"])
-        percent = (_size / total_bytes) * 100
-        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {_size} |")
+        percent = (_lines / total_lines) * 100
+        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {_lines} |")
 
     return header + "\n".join(rows)
 
@@ -167,14 +167,14 @@ for repo in org.get_repos(type="private"):
     primary_lang = repo.language or "N/A"
 
     # Сбор языков
-    repo_langs = repo.get_languages()
-    for lang, size in repo_langs.items():
-        languages[lang] = languages.get(lang, 0) + size
+    for lang, stats in cloc_data.items():
+        if lang != "SUM":
+            languages[lang] = languages.get(lang, 0) + stats.get("code", 0)
 
     # Сбор контрибьюторов
     for contributor in repo.get_contributors():
         all_contributors.add(contributor.login)
-        if contributor.contributions > 10:  # Условие "активных участников"
+        if contributor.contributions > 10:
             active_contributors.add(contributor.login)
 
     # Добавляем описание и дату последнего коммита
