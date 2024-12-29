@@ -58,12 +58,17 @@ def format_languages_table(_languages: dict) -> str:
     if not _languages:
         return "_Нет данных по языкам_"
 
-    header = "| Язык         | Кол-во байт |\n|--------------|-------------|\n"
-    rows = []
+    total_bytes = sum(_languages.values())
+    sorted_languages = sorted(_languages.items(), key=lambda x: x[1], reverse=True)
 
-    for _lang, _size in _languages.items():
+    header = "| № | Язык         | Процент использования | Кол-во байт |\n"
+    header += "|---|------|-----------------------|-------------|\n"
+
+    rows = []
+    for rank, (_lang, _size) in enumerate(sorted_languages, start=1):
         icon = language_icons.get(_lang, language_icons["N/A"])
-        rows.append(f"| {icon} | {_size} |")
+        percent = (_size / total_bytes) * 100
+        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {_size} |")
 
     return header + "\n".join(rows)
 
