@@ -1,4 +1,3 @@
-
 <h1 align="center">👋 Добро пожаловать в <strong>Nata-Practices</strong>!</h1>
 
 <p align="center">
@@ -11,9 +10,6 @@
   <img src="https://img.shields.io/badge/Последняя_активность-29.12.2024-brightgreen" alt="Last Activity" />
 </p>
 
-<hr/>
-
-## 📂 Репозитории
 | Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
 |-------------|---------------|------------|--------|------------------|----------|
 | [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 2686 | 26 | 28.12.2024 | Project with Swagger for Nata |
