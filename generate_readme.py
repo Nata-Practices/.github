@@ -97,7 +97,14 @@ for repo in org.get_repos(type="private"):
     # Обновляем последнюю активность
     if not last_activity or repo.updated_at > last_activity:
         last_activity = repo.updated_at
-    
+
+    # Получение даты последнего коммита
+    try:
+        last_commit_date = repo.get_commits()[0].commit.committer.date
+        last_commit_date = last_commit_date.astimezone(moscow_tz).strftime("%d.%m.%Y")
+    except GithubException:
+        last_commit_date = "Нет данных"
+        
     # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
@@ -158,7 +165,7 @@ for repo in org.get_repos(type="private"):
         "lines": total_lines_repo,
         "files": total_files_repo,
         "description": repo.description or "Описание отсутствует",
-        "last_commit": repo.pushed_at.astimezone(moscow_tz).strftime("%d.%m.%Y")
+        "last_commit": last_commit_date
     })
 
 repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
