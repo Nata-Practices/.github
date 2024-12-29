@@ -93,7 +93,7 @@ for repo in org.get_repos(type="private"):
 
     # Обновляем последнюю активность
     if not last_activity or repo.updated_at > last_activity:
-        last_activity = repo.updated_at.astimezone(moscow_tz).strftime("%d.%m.%Y")
+        last_activity = repo.updated_at
     
     # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -167,7 +167,7 @@ output_text = readme_template.format(
     total_storage=round(total_storage, 2),
     total_contributors=len(all_contributors),
     active_contributors=len(active_contributors),
-    last_activity=last_activity,
+    last_activity=last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y"),
     languages_section=languages_section,
     repositories_section=repositories_section
 )
