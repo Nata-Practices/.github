@@ -12,7 +12,8 @@
 </p>
 
 ## 🌐 Языки
-| Язык | Кол-во байт |
+| Язык         | Кол-во байт |
+|--------------|-------------|
 | <img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python"> | 52105 |
 | <img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#"> | 102848 |
 | <img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin"> | 19381 |
