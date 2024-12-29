@@ -45,11 +45,11 @@ readme_template = """
 
 # Словарь с иконками для языков
 language_icons = {
-    "Python": '<img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python">',  # Синий
-    "C#": '<img src="https://cdn.simpleicons.org/csharp/239120" height="20" alt="C#">',  # Зелёный
-    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin">',  # Голубой
-    "Java": '<img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java">',  # Синий
-    "N/A": '<img src="https://cdn.simpleicons.org/code/gray" height="20" alt="Unknown">'  # Серый
+    "Python": '<img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python">',
+    "C#": '<img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#">',
+    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin">',
+    "Java": '<img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java">',
+    "N/A": '<img src="https://cdn.simpleicons.org/code/gray" height="20" alt="Unknown">'
 }
 
 
@@ -58,7 +58,7 @@ def format_languages_table(_languages: dict) -> str:
     if not _languages:
         return "_Нет данных по языкам_"
 
-    header = "| Язык         | Кол-во байт |\n|--------------|--------|-------------|\n"
+    header = "| Язык | Кол-во байт |\n"
     rows = []
     for _lang, _size in _languages.items():
         icon = language_icons.get(_lang, language_icons["N/A"])
