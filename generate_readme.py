@@ -45,24 +45,23 @@ readme_template = """
 
 # Словарь с иконками для языков
 language_icons = {
-    "Python": '<img src="https://img.shields.io/badge/-000?logo=python&logoColor=white&style=flat-square" alt="Python">',
-    "C#": '<img src="https://img.shields.io/badge/-000?logo=c-sharp&logoColor=white&style=flat-square" alt="C#">',
-    "Kotlin": '<img src="https://img.shields.io/badge/-000?logo=kotlin&logoColor=white&style=flat-square" alt="Kotlin">',
-    "Java": '<img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java">',
-    "N/A": '<img src="https://img.shields.io/badge/-000?logo=code&logoColor=gray&style=flat-square" alt="Unknown">'
+    "Python": '<img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python">',
+    "C#": '<img src="https://cdn.simpleicons.org/csharp/239120" height="20" alt="C#">',
+    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin">',
+    "Java": '<img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java">',
+    "N/A": '<img src="https://cdn.simpleicons.org/code/gray" height="20" alt="Unknown">'
 }
-
 
 # Форматирование таблицы языков
 def format_languages_table(_languages: dict) -> str:
     if not _languages:
         return "_Нет данных по языкам_"
 
-    header = "| Язык         | Значок | Кол-во байт |\n|--------------|--------|-------------|\n"
+    header = "| Язык         | Язык | Кол-во байт |\n|--------------|--------|-------------|\n"
     rows = []
     for _lang, _size in _languages.items():
         icon = language_icons.get(lang, language_icons["N/A"])
-        rows.append(f"| {_lang} | {icon} | {_size} |")
+        rows.append(f"| {icon} | {_size} |")
     return header + "\n".join(rows)
 
 
@@ -71,14 +70,14 @@ def format_repos_table(_repos_info: list) -> str:
     if not _repos_info:
         return "_Нет репозиториев_"
 
-    header = "| Репозиторий | Язык (Иконка) | Строк кода | Файлов | Последний коммит | Описание |\n"
+    header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
     header += "|-------------|---------------|------------|--------|------------------|----------|\n"
     rows = []
     for r in _repos_info:
         icon = language_icons.get(r['language'], language_icons["N/A"])
         row = (
             f"| [{r['name']}]({r['html_url']}) "
-            f"| {icon} {r['language']} "
+            f"| {icon} "
             f"| {r['lines']} "
             f"| {r['files']} "
             f"| {r['last_commit']} "
