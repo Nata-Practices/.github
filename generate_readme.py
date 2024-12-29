@@ -57,14 +57,17 @@ def format_repos_table(repos_info: list) -> str:
     if not repos_info:
         return "_Нет репозиториев_"
 
-    header = "| Репозиторий | Язык | Строк кода | Файлов |\n|-------------|------|------------|--------|\n"
+    header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
+    header += "|-------------|------|------------|--------|------------------|----------|\n"
     rows = []
     for r in repos_info:
         row = (
             f"| [{r['name']}]({r['html_url']}) "
             f"| {r['language']} "
             f"| {r['lines']} "
-            f"| {r['files']} |"
+            f"| {r['files']} "
+            f"| {r['last_commit']} "
+            f"| {r['description']} |"
         )
         rows.append(row)
 
@@ -147,14 +150,19 @@ for repo in org.get_repos(type="private"):
         if contributor.contributions > 10:  # Условие "активных участников"
             active_contributors.add(contributor.login)
 
+    # Добавляем описание и дату последнего коммита
     repos_info.append({
         "name": repo_name,
         "html_url": repo.html_url,
         "language": primary_lang,
         "lines": total_lines_repo,
-        "files": total_files_repo
+        "files": total_files_repo,
+        "description": repo.description or "Описание отсутствует",
+        "last_commit": repo.pushed_at.astimezone(moscow_tz).strftime("%d.%m.%Y")
     })
 
+repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
+    
 # Формируем итоговый Markdown
 languages_section = format_languages_table(languages)
 repositories_section = format_repos_table(repos_info)
