@@ -21,7 +21,9 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: pip install PyGithub
+      run: |
+        pip install PyGithub
+        pip install pytz
       
     - name: Install cloc
       run: sudo apt-get install -y cloc
