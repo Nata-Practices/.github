@@ -21,8 +21,7 @@ ORG_NAME = "Nata-Practices"
 g = Github(GITHUB_TOKEN)
 org = g.get_organization(ORG_NAME)
 
-readme_template = """
-<h1 align="center">👋 Добро пожаловать в <strong>{org_name}</strong>!</h1>
+readme_template = """<h1 align="center">👋 Добро пожаловать в <strong>{org_name}</strong>!</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Репозиториев-{repo_count}-blue" alt="Repo Count" />
@@ -34,9 +33,6 @@ readme_template = """
   <img src="https://img.shields.io/badge/Последняя_активность-{last_activity}-brightgreen" alt="Last Activity" />
 </p>
 
-<hr/>
-
-## 📂 Репозитории
 {repositories_section}
 """
 
