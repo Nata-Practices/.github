@@ -12,12 +12,12 @@
 </p>
 
 ## 🌐 Языки
-| Язык         | Кол-во байт |
-|--------------|-------------|
-| <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 52105 |
-| <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 102848 |
-| <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 19381 |
-| <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 24164 |
+| № | Язык         | Процент использования | Кол-во байт |
+|---|------|-----------------------|-------------|
+| 1 | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 51.81% | 102848 |
+| 2 | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 26.25% | 52105 |
+| 3 | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 12.17% | 24164 |
+| 4 | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 9.76% | 19381 |
 
 <hr/>
 
