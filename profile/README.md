@@ -13,11 +13,26 @@
 
 ## 🌐 Языки
 | № | Язык         | Процент использования | Кол-во байт |
-|---|------|-----------------------|-------------|
-| 1 | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 51.81% | 102848 |
-| 2 | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 26.25% | 52105 |
-| 3 | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 12.17% | 24164 |
-| 4 | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 9.76% | 19381 |
+|---|--------------|-----------------------|-------------|
+| 1 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 64.33% | 0 |
+| 2 | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 9.28% | 102848 |
+| 3 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 5.64% | 0 |
+| 4 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 5.54% | 0 |
+| 5 | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 4.11% | 52105 |
+| 6 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 2.86% | 0 |
+| 7 | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 2.82% | 24164 |
+| 8 | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 1.79% | 19381 |
+| 9 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 1.12% | 0 |
+| 10 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.66% | 0 |
+| 11 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.64% | 0 |
+| 12 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.38% | 0 |
+| 13 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.26% | 0 |
+| 14 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.22% | 0 |
+| 15 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.15% | 0 |
+| 16 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.11% | 0 |
+| 17 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.07% | 0 |
+| 18 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.00% | 0 |
+| 19 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.00% | 0 |
 
 <hr/>
 
