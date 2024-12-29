@@ -45,11 +45,11 @@ readme_template = """
 
 # Словарь с иконками для языков
 language_icons = {
-    "Python": '<img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python">',
-    "C#": '<img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#">',
-    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin">',
-    "Java": '<img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java">',
-    "N/A": '<img src="https://cdn.simpleicons.org/code/gray" height="20" alt="Unknown">'
+    "Python": '<img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python">',
+    "C#": '<img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#">',
+    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin">',
+    "Java": '<img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java">',
+    "N/A": '<img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown">'
 }
 
 
