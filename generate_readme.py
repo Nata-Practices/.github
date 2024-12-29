@@ -5,6 +5,7 @@ import json
 from github import Github
 from shutil import which
 import sys
+from datetime import datetime
 
 if not which("cloc"):
     sys.exit("cloc не установлен или не найден в PATH")
@@ -22,8 +23,12 @@ readme_template = """
 
 <p align="center">
   <img src="https://img.shields.io/badge/Репозиториев-{repo_count}-blue?style=for-the-badge" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Строк кода-{total_lines}-brightgreen?style=for-the-badge" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Строк_кода-{total_lines}-brightgreen?style=for-the-badge" alt="Total Lines" />
   <img src="https://img.shields.io/badge/Файлов-{total_files}-yellow?style=for-the-badge" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Объем_хранилища-{total_storage}MB-purple?style=for-the-badge" alt="Total Storage" />
+  <img src="https://img.shields.io/badge/Контрибьюторы-{total_contributors}-orange?style=for-the-badge" alt="Contributors" />
+  <img src="https://img.shields.io/badge/Активных_участников-{active_contributors}-red?style=for-the-badge" alt="Active Contributors" />
+  <img src="https://img.shields.io/badge/Последняя_активность-{last_activity}-brightgreen?style=for-the-badge" alt="Last Activity" />
 </p>
 
 ## 🌐 Языки
@@ -67,8 +72,13 @@ languages = {}
 total_lines = 0
 total_files = 0
 repos_info = []
+total_storage = 0
+last_activity = None
+all_contributors = set()
+active_contributors = set()
+doc_coverage = 0
 
-for repo in org.get_repos():
+for repo in org.get_repos(type="private"):
     repo_name = repo.name
     
     # Пропускаем, если нужно
@@ -76,7 +86,12 @@ for repo in org.get_repos():
         continue
     
     repo_count += 1
-    
+    total_storage += repo.size / 1024  # Перевод размера в MB
+
+    # Обновляем последнюю активность
+    if not last_activity or repo.updated_at > last_activity:
+        last_activity = repo.updated_at
+
     # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
@@ -106,6 +121,11 @@ for repo in org.get_repos():
 
             total_lines += total_lines_repo
             total_files += total_files_repo
+
+            # Уровень документации (README.md)
+            if os.path.exists(os.path.join(repo_dir, "README.md")):
+                doc_coverage += 1
+
         except:
             total_lines_repo = 0
             total_files_repo = 0
@@ -117,6 +137,12 @@ for repo in org.get_repos():
     repo_langs = repo.get_languages()
     for lang, size in repo_langs.items():
         languages[lang] = languages.get(lang, 0) + size
+
+    # Сбор контрибьюторов
+    for contributor in repo.get_contributors():
+        all_contributors.add(contributor.login)
+        if contributor.contributions > 10:  # Условие "активных участников"
+            active_contributors.add(contributor.login)
 
     repos_info.append({
         "name": repo_name,
@@ -135,6 +161,10 @@ output_text = readme_template.format(
     repo_count=repo_count,
     total_lines=total_lines,
     total_files=total_files,
+    total_storage=round(total_storage, 2),
+    total_contributors=len(all_contributors),
+    active_contributors=len(active_contributors),
+    last_activity=last_activity.strftime("%d-%m-%Y"),
     languages_section=languages_section,
     repositories_section=repositories_section
 )
