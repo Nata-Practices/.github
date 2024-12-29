@@ -144,7 +144,7 @@ for repo in org.get_repos(type="private"):
                     repo_dir,
                     "--json",
                     "--exclude-dir=.venv,__pycache__,.idea,.gradle,build",
-                    "--exclude-ext=json,md,gitignore"
+                    "--exclude-ext=json,md,gitignore,cache,props,targets,bat,properties,"
                 ],
                 capture_output=True,
                 text=True
