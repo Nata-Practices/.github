@@ -45,12 +45,11 @@ readme_template = """
 
 # Словарь с иконками для языков
 language_icons = {
-    "Python": '<img src="https://img.shields.io/badge/-000?logo=python" alt="Python">',
-    # "C#": '<img src="https://img.shields.io/badge/-000?logo=с#" alt="C#">',
-    "C#": '<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTEuMTk0IDcuNTQzdjguOTEzYzAgMS4xMDMuNTg4IDIuMTIyIDEuNTQ0IDIuNjc0bDcuNzE4IDQuNDU2YTMuMDkgMy4wOSAwIDAgMCAzLjA4OCAwbDcuNzE4LTQuNDU2YTMuMDkgMy4wOSAwIDAgMCAxLjU0NC0yLjY3NFY3LjU0M2EzLjA4IDMuMDggMCAwIDAtMS41NDQtMi42NzNMMTMuNTQ0LjQxNGEzLjA5IDMuMDkgMCAwIDAtMy4wODggMEwyLjczOCA0Ljg3YTMuMDkgMy4wOSAwIDAgMC0xLjU0NCAyLjY3M201LjQwMyAyLjkxNHYzLjA4N2EuNzcuNzcgMCAwIDAgLjc3Mi43NzJhLjc3My43NzMgMCAwIDAgLjc3Mi0uNzcyYS43NzMuNzczIDAgMCAxIDEuMzE3LS41NDZhLjc4Ljc4IDAgMCAxIC4yMjYuNTQ2YTIuMzE0IDIuMzE0IDAgMSAxLTQuNjMxIDB2LTMuMDg3YzAtLjYxNS4yNDQtMS4yMDMuNjc5LTEuNjM3YTIuMzEgMi4zMSAwIDAgMSAzLjI3NCAwYy40MzQuNDM0LjY3OCAxLjAyMy42NzggMS42MzdhLjc3Ljc3IDAgMCAxLS4yMjYuNTQ1YS43NjcuNzY3IDAgMCAxLTEuMDkxIDBhLjc3Ljc3IDAgMCAxLS4yMjYtLjU0NWEuNzcuNzcgMCAwIDAtLjc3Mi0uNzcyYS43Ny43NyAwIDAgMC0uNzcyLjc3Mm0xMi4zNSAzLjA4N2EuNzcuNzcgMCAwIDEtLjc3Mi43NzJoLS43NzJ2Ljc3MmEuNzczLjc3MyAwIDAgMS0xLjU0NCAwdi0uNzcyaC0xLjU0NHYuNzcyYS43NzMuNzczIDAgMCAxLTEuMzE3LjU0NmEuNzguNzggMCAwIDEtLjIyNi0uNTQ2di0uNzcySDEyYS43NzEuNzcxIDAgMSAxIDAtMS41NDRoLjc3MnYtMS41NDNIMTJhLjc3Ljc3IDAgMSAxIDAtMS41NDRoLjc3MnYtLjc3MmEuNzczLjc3MyAwIDAgMSAxLjMxNy0uNTQ2YS43OC43OCAwIDAgMSAuMjI2LjU0NnYuNzcyaDEuNTQ0di0uNzcyYS43NzMuNzczIDAgMCAxIDEuNTQ0IDB2Ljc3MmguNzcyYS43NzIuNzcyIDAgMCAxIDAgMS41NDRoLS43NzJ2MS41NDNoLjc3MmEuNzc2Ljc3NiAwIDAgMSAuNzcyLjc3Mm0tMy4wODgtMi4zMTVoLTEuNTQ0djEuNTQzaDEuNTQ0eiIvPjwvc3ZnPg==" alt="C#">',
-    "Kotlin": '<img src="https://img.shields.io/badge/-000?logo=kotlin" alt="Kotlin">',
-    "Java": '<img src="https://img.shields.io/badge/-000?logo=openjdk" alt="Java">',
-    "N/A": '<img src="https://img.shields.io/badge/-000?logo=code&logoColor=gray" alt="Unknown">'
+    "Python": '<img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python">',  # Синий
+    "C#": '<img src="https://cdn.simpleicons.org/csharp/239120" height="20" alt="C#">',  # Зелёный
+    "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin">',  # Голубой
+    "Java": '<img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java">',  # Синий
+    "N/A": '<img src="https://cdn.simpleicons.org/code/gray" height="20" alt="Unknown">'  # Серый
 }
 
 
@@ -62,8 +61,8 @@ def format_languages_table(_languages: dict) -> str:
     header = "| Язык         | Кол-во байт |\n|--------------|--------|-------------|\n"
     rows = []
     for _lang, _size in _languages.items():
-        icon = language_icons.get(lang, language_icons["N/A"])
-        rows.append(f"| {_lang} | {icon} | {_size} |")
+        icon = language_icons.get(_lang, language_icons["N/A"])
+        rows.append(f"| {icon} | {_size} |")
     return header + "\n".join(rows)
 
 
@@ -72,14 +71,14 @@ def format_repos_table(_repos_info: list) -> str:
     if not _repos_info:
         return "_Нет репозиториев_"
 
-    header = "| Репозиторий | Язык (Иконка) | Строк кода | Файлов | Последний коммит | Описание |\n"
+    header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
     header += "|-------------|---------------|------------|--------|------------------|----------|\n"
     rows = []
     for r in _repos_info:
         icon = language_icons.get(r['language'], language_icons["N/A"])
         row = (
             f"| [{r['name']}]({r['html_url']}) "
-            f"| {icon} {r['language']} "
+            f"| {icon} "
             f"| {r['lines']} "
             f"| {r['files']} "
             f"| {r['last_commit']} "
