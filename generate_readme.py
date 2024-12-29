@@ -54,12 +54,12 @@ language_icons = {
 
 
 # Форматирование таблицы языков
-def format_languages_table(_languages: dict, _lines: dict) -> str:
-    if not _lines:
+def format_languages_table(_languages: dict) -> str:
+    if not lines:
         return "_Нет данных по языкам_"
 
-    total_lines = sum(_lines.values())
-    sorted_languages = sorted(_lines.items(), key=lambda x: x[1], reverse=True)
+    _total_lines = sum(lines.values())
+    sorted_languages = sorted(lines.items(), key=lambda x: x[1], reverse=True)
 
     header = "| № | Язык         | Процент использования | Кол-во байт |\n"
     header += "|---|--------------|-----------------------|-------------|\n"
@@ -67,7 +67,7 @@ def format_languages_table(_languages: dict, _lines: dict) -> str:
     rows = []
     for rank, (_lang, _line_count) in enumerate(sorted_languages, start=1):
         icon = language_icons.get(_lang, language_icons["N/A"])
-        percent = (_line_count / total_lines) * 100
+        percent = (_line_count / _total_lines) * 100
         byte_size = _languages.get(_lang, 0)
         rows.append(f"| {rank} | {icon} | {percent:.2f}% | {byte_size} |")
 
