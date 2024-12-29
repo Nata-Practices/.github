@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Объем_хранилища-1.39MB-purple?style=for-the-badge" alt="Total Storage" />
   <img src="https://img.shields.io/badge/Контрибьюторы-2-orange?style=for-the-badge" alt="Contributors" />
   <img src="https://img.shields.io/badge/Активных_участников-1-red?style=for-the-badge" alt="Active Contributors" />
-  <img src="https://img.shields.io/badge/Последняя_активность-29-12-2024-brightgreen?style=for-the-badge" alt="Last Activity" />
+  <img src="https://img.shields.io/badge/Последняя_активность-29.12.2024-brightgreen?style=for-the-badge" alt="Last Activity" />
 </p>
 
 ## 🌐 Языки
