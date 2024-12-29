@@ -14,19 +14,19 @@
 ## 🌐 Языки
 | Язык         | Кол-во байт |
 |--------------|-------------|
-| <img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python"> | 52105 |
-| <img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#"> | 102848 |
-| <img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin"> | 19381 |
-| <img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java"> | 24164 |
+| <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 52105 |
+| <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 102848 |
+| <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 19381 |
+| <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 24164 |
 
 <hr/>
 
 ## 📂 Репозитории
 | Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
 |-------------|---------------|------------|--------|------------------|----------|
-| [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | <img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#"> | 12295 | 45 | 28.12.2024 | Project with Swagger for Nata |
-| [UserService](https://github.com/Nata-Practices/UserService) | <img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#"> | 2672 | 31 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
-| [APIGateway](https://github.com/Nata-Practices/APIGateway) | <img src="https://img.shields.io/badge/C%23-2" height="20" alt="C#"> | 1937 | 21 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
-| [drugstore](https://github.com/Nata-Practices/drugstore) | <img src="https://cdn.simpleicons.org/kotlin/0095D5" height="20" alt="Kotlin"> | 1430 | 43 | 28.12.2024 | Simple mobile app with sorting and searching |
-| [infproc](https://github.com/Nata-Practices/infproc) | <img src="https://cdn.simpleicons.org/python/3776AB" height="20" alt="Python"> | 916 | 15 | 27.12.2024 | Graph project for Nata |
-| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | <img src="https://cdn.simpleicons.org/openjdk/007396" height="20" alt="Java"> | 829 | 15 | 28.12.2024 | Data management practices |
+| [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 12295 | 45 | 28.12.2024 | Project with Swagger for Nata |
+| [UserService](https://github.com/Nata-Practices/UserService) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 2672 | 31 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
+| [APIGateway](https://github.com/Nata-Practices/APIGateway) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 1937 | 21 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
+| [drugstore](https://github.com/Nata-Practices/drugstore) | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 1430 | 43 | 28.12.2024 | Simple mobile app with sorting and searching |
+| [infproc](https://github.com/Nata-Practices/infproc) | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 916 | 15 | 27.12.2024 | Graph project for Nata |
+| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 829 | 15 | 28.12.2024 | Data management practices |
