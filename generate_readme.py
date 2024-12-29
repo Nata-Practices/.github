@@ -154,10 +154,6 @@ for repo in org.get_repos(type="private"):
                 cloc_data = json.loads(lines_output)
                 total_lines_repo = cloc_data.get("SUM", {}).get("code", 0)
                 total_files_repo = cloc_data.get("SUM", {}).get("nFiles", 0)
-
-                for lang, stats in cloc_data.items():
-                    if lang != "SUM":
-                        lines[lang] = lines.get(lang, 0) + stats.get("code", 0)
             else:
                 total_lines_repo = 0
                 total_files_repo = 0
@@ -176,6 +172,8 @@ for repo in org.get_repos(type="private"):
     repo_langs = repo.get_languages()
     for lang, size in repo_langs.items():
         languages[lang] = languages.get(lang, 0) + size
+    for lang in languages:
+        lines[lang] = lines.get(lang, 0) + total_lines_repo
 
     # Сбор контрибьюторов
     for contributor in repo.get_contributors():
