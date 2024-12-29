@@ -139,7 +139,7 @@ for repo in org.get_repos(type="private"):
 
         try:
             lines_output = subprocess.run(
-                ["cloc", repo_dir, "--json", "--exclude-dir=.venv,__pycache__,.idea"],
+                ["cloc", repo_dir, "--json", "--exclude-dir=.venv,__pycache__,.idea,.gradle,build"],
                 capture_output=True,
                 text=True
             ).stdout
