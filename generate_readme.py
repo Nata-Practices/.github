@@ -54,21 +54,22 @@ language_icons = {
 
 
 # Форматирование таблицы языков
-def format_languages_table(_languages: dict) -> str:
-    if not _languages:
+def format_languages_table(_languages: dict, _lines: dict) -> str:
+    if not _lines:
         return "_Нет данных по языкам_"
 
-    total_bytes = sum(_languages.values())
-    sorted_languages = sorted(_languages.items(), key=lambda x: x[1], reverse=True)
+    total_lines = sum(_lines.values())
+    sorted_languages = sorted(_lines.items(), key=lambda x: x[1], reverse=True)
 
     header = "| № | Язык         | Процент использования | Кол-во байт |\n"
-    header += "|---|------|-----------------------|-------------|\n"
+    header += "|---|--------------|-----------------------|-------------|\n"
 
     rows = []
-    for rank, (_lang, _size) in enumerate(sorted_languages, start=1):
+    for rank, (_lang, _line_count) in enumerate(sorted_languages, start=1):
         icon = language_icons.get(_lang, language_icons["N/A"])
-        percent = (_size / total_bytes) * 100
-        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {_size} |")
+        percent = (_line_count / total_lines) * 100
+        byte_size = _languages.get(_lang, 0)
+        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {byte_size} |")
 
     return header + "\n".join(rows)
 
@@ -100,6 +101,7 @@ def format_repos_table(_repos_info: list) -> str:
 repo_count = 0
 languages = {}
 total_lines = 0
+lines = {}
 total_files = 0
 repos_info = []
 total_storage = 0
@@ -152,6 +154,11 @@ for repo in org.get_repos(type="private"):
                 cloc_data = json.loads(lines_output)
                 total_lines_repo = cloc_data.get("SUM", {}).get("code", 0)
                 total_files_repo = cloc_data.get("SUM", {}).get("nFiles", 0)
+
+                if cloc_data:
+                    for lang, stats in cloc_data.items():
+                        if lang != "SUM":
+                            lines[lang] = lines.get(lang, 0) + stats.get("code", 0)
             else:
                 total_lines_repo = 0
                 total_files_repo = 0
