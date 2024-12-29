@@ -14,25 +14,10 @@
 ## 🌐 Языки
 | № | Язык         | Процент использования | Кол-во байт |
 |---|------|-----------------------|-------------|
-| 1 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 64.33% | 12917 |
-| 2 | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 9.28% | 1863 |
-| 3 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 5.64% | 1133 |
-| 4 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 5.54% | 1113 |
-| 5 | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 4.11% | 825 |
-| 6 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 2.86% | 575 |
-| 7 | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 2.82% | 567 |
-| 8 | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 1.79% | 359 |
-| 9 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 1.12% | 225 |
-| 10 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.66% | 132 |
-| 11 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.64% | 129 |
-| 12 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.38% | 76 |
-| 13 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.26% | 52 |
-| 14 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.22% | 45 |
-| 15 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.15% | 31 |
-| 16 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.11% | 22 |
-| 17 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.07% | 15 |
-| 18 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.00% | 0 |
-| 19 | <img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown"> | 0.00% | 0 |
+| 1 | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 51.81% | 102848 |
+| 2 | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 26.25% | 52105 |
+| 3 | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 12.17% | 24164 |
+| 4 | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 9.76% | 19381 |
 
 <hr/>
 
