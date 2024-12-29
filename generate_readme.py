@@ -43,7 +43,7 @@ readme_template = """
 {repositories_section}
 """
 
-# Словарь с иконками для языков
+# Иконки для языков (для удобства в таблице)
 language_icons = {
     "Python": '<img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python">',
     "C#": '<img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#">',
@@ -53,36 +53,49 @@ language_icons = {
 }
 
 
-# Форматирование таблицы языков
-def format_languages_table(_languages: dict) -> str:
-    if not lines:
+def format_languages_table(code_lines_per_language: dict, bytes_per_language: dict) -> str:
+    """
+    Строит таблицу на основе строк кода (code_lines_per_language) и байтов (bytes_per_language).
+    """
+    if not code_lines_per_language:
         return "_Нет данных по языкам_"
 
-    _total_lines = sum(lines.values())
-    sorted_languages = sorted(lines.items(), key=lambda x: x[1], reverse=True)
+    total_lines_local = sum(code_lines_per_language.values())
+    # Сортируем языки по убыванию строк кода
+    sorted_languages = sorted(
+        code_lines_per_language.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
 
-    header = "| № | Язык         | Процент использования | Кол-во байт |\n"
-    header += "|---|--------------|-----------------------|-------------|\n"
+    header = "| № | Язык | Процент использования | Кол-во байт |\n"
+    header += "|---|------|-----------------------|-------------|\n"
 
     rows = []
-    for rank, (_lang, _line_count) in enumerate(sorted_languages, start=1):
-        icon = language_icons.get(_lang, language_icons["N/A"])
-        percent = (_line_count / _total_lines) * 100
-        byte_size = _languages.get(_lang, 0)
-        rows.append(f"| {rank} | {icon} | {percent:.2f}% | {byte_size} |")
+    for rank, (lang, loc) in enumerate(sorted_languages, start=1):
+        icon = language_icons.get(lang, language_icons["N/A"])
+        # Считаем процент только по строкам кода
+        percent = (loc / total_lines_local) * 100
+        # байты берем из GitHub API (если вдруг там не было этого языка, будет 0)
+        byte_size = bytes_per_language.get(lang, 0)
+        rows.append(
+            f"| {rank} | {icon} | {percent:.2f}% | {byte_size} |"
+        )
 
     return header + "\n".join(rows)
 
 
-# Форматирование таблицы репозиториев
-def format_repos_table(_repos_info: list) -> str:
-    if not _repos_info:
+def format_repos_table(repos_info: list) -> str:
+    """
+    Формируем сводную таблицу по репозиториям.
+    """
+    if not repos_info:
         return "_Нет репозиториев_"
 
     header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
-    header += "|-------------|---------------|------------|--------|------------------|----------|\n"
+    header += "|-------------|------|------------|--------|------------------|----------|\n"
     rows = []
-    for r in _repos_info:
+    for r in repos_info:
         icon = language_icons.get(r['language'], language_icons["N/A"])
         row = (
             f"| [{r['name']}]({r['html_url']}) "
@@ -97,41 +110,47 @@ def format_repos_table(_repos_info: list) -> str:
     return header + "\n".join(rows)
 
 
+# ---------------------------------------------
 # Основная логика
+# ---------------------------------------------
+
 repo_count = 0
-languages = {}
-total_lines = 0
-lines = {}
-total_files = 0
-repos_info = []
-total_storage = 0
+total_lines = 0       # Общее число строк кода (сумма по всем репо)
+total_files = 0       # Общее число файлов (сумма по всем репо)
+total_storage = 0     # Суммарный объём в MB
 last_activity = None
 all_contributors = set()
 active_contributors = set()
-doc_coverage = 0
+
+# Для статистики по языкам:
+code_lines_per_language = {}  # Здесь аккумулируем строки (cloc)
+bytes_per_language = {}       # Здесь аккумулируем байты (get_languages)
+
+repos_info = []
 
 for repo in org.get_repos(type="private"):
     repo_name = repo.name
 
-    # Пропускаем, если нужно
+    # Пропустим, если это служебное
     if repo_name == ".github-private":
         continue
 
     repo_count += 1
-    total_storage += repo.size / 1024  # Перевод размера в MB
+    # GitHub даёт размер репо в Kb (repo.size). Переведём в MB:
+    total_storage += repo.size / 1024
 
-    # Обновляем последнюю активность
+    # Следим за последней активностью
     if not last_activity or repo.updated_at > last_activity:
         last_activity = repo.updated_at
 
-    # Получение даты последнего коммита
+    # Получаем дату последнего коммита (если есть)
     try:
         last_commit_date = repo.get_commits()[0].commit.committer.date
         last_commit_date = last_commit_date.astimezone(moscow_tz).strftime("%d.%m.%Y")
     except:
         last_commit_date = "Нет данных"
 
-    # Клонируем репо в temp
+    # Клонируем репозиторий в temp-папку и прогоняем через cloc
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
         clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
@@ -142,14 +161,16 @@ for repo in org.get_repos(type="private"):
         )
 
         if clone_result.returncode != 0:
+            # Если не получилось склонировать — пропустим
             continue
 
         try:
             lines_output = subprocess.run(
-                ["cloc", repo_dir, "--json", "--exclude-dir=.venv,__pycache__"],
+                ["cloc", repo_dir, "--json", "--exclude-dir=.venv,__pycache__,.idea"],
                 capture_output=True,
                 text=True
             ).stdout
+
             if lines_output.strip():
                 cloc_data = json.loads(lines_output)
                 total_lines_repo = cloc_data.get("SUM", {}).get("code", 0)
@@ -158,30 +179,41 @@ for repo in org.get_repos(type="private"):
                 total_lines_repo = 0
                 total_files_repo = 0
 
+            # Увеличиваем глобальные счётчики
             total_lines += total_lines_repo
             total_files += total_files_repo
 
+            # Добавляем строки кода по языкам
+            # (в cloc_data обычно есть ключи "header", "SUM" — их пропускаем)
+            for lang_name, lang_stats in cloc_data.items():
+                if lang_name in ("header", "SUM"):
+                    continue
+                code_count = lang_stats.get("code", 0)
+                if code_count > 0:
+                    code_lines_per_language[lang_name] = (
+                        code_lines_per_language.get(lang_name, 0) + code_count
+                    )
+
         except:
+            # Если что-то упало при анализе — просто пропустим
             total_lines_repo = 0
             total_files_repo = 0
 
-    # Язык
+    # Для таблицы репозиториев: язык берем из repo.language
     primary_lang = repo.language or "N/A"
 
-    # Сбор языков
-    repo_langs = repo.get_languages()
+    # Сбор «байтов» по языкам из GitHub (repo.get_languages())
+    repo_langs = repo.get_languages()  # { "Python": <bytes>, "C#": <bytes>, ...}
     for lang, size in repo_langs.items():
-        languages[lang] = languages.get(lang, 0) + size
-    for lang in languages:
-        lines[lang] = lines.get(lang, 0) + total_lines_repo
+        bytes_per_language[lang] = bytes_per_language.get(lang, 0) + size
 
-    # Сбор контрибьюторов
+    # Сбор контрибьюторов (для подсчёта их количества)
     for contributor in repo.get_contributors():
         all_contributors.add(contributor.login)
         if contributor.contributions > 10:
             active_contributors.add(contributor.login)
 
-    # Добавляем описание и дату последнего коммита
+    # Добавляем запись о репозитории
     repos_info.append({
         "name": repo_name,
         "html_url": repo.html_url,
@@ -192,11 +224,18 @@ for repo in org.get_repos(type="private"):
         "last_commit": last_commit_date
     })
 
-repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
+# Сортируем репозитории по убыванию строк кода
+repos_info.sort(key=lambda r: r['lines'], reverse=True)
 
-# Формируем итоговый Markdown
-languages_section = format_languages_table(languages)
+# Формируем готовые части для README.md
+languages_section = format_languages_table(code_lines_per_language, bytes_per_language)
 repositories_section = format_repos_table(repos_info)
+
+# Формируем итоговый Markdown, подставляем статистику
+if last_activity:
+    last_activity_str = last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y")
+else:
+    last_activity_str = "Нет данных"
 
 output_text = readme_template.format(
     org_name=ORG_NAME,
@@ -206,7 +245,7 @@ output_text = readme_template.format(
     total_storage=round(total_storage, 2),
     total_contributors=len(all_contributors),
     active_contributors=len(active_contributors),
-    last_activity=last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y"),
+    last_activity=last_activity_str,
     languages_section=languages_section,
     repositories_section=repositories_section
 )
