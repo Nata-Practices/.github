@@ -58,11 +58,13 @@ def format_languages_table(_languages: dict) -> str:
     if not _languages:
         return "_Нет данных по языкам_"
 
-    header = "| Язык | Кол-во байт |\n"
+    header = "| Язык         | Кол-во байт |\n|--------------|-------------|\n"
     rows = []
+
     for _lang, _size in _languages.items():
         icon = language_icons.get(_lang, language_icons["N/A"])
         rows.append(f"| {icon} | {_size} |")
+
     return header + "\n".join(rows)
 
 
