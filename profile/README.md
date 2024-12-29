@@ -12,21 +12,21 @@
 </p>
 
 ## 🌐 Языки
-| Язык | Кол-во байт |
-|------|------------|
-| Python | 52105 |
-| C# | 102848 |
-| Kotlin | 19381 |
-| Java | 24164 |
+| Язык         | Значок | Кол-во байт |
+|--------------|--------|-------------|
+| Python | <img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java"> | 52105 |
+| C# | <img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java"> | 102848 |
+| Kotlin | <img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java"> | 19381 |
+| Java | <img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java"> | 24164 |
 
 <hr/>
 
 ## 📂 Репозитории
-| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
-|-------------|------|------------|--------|------------------|----------|
-| [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | C# | 12295 | 45 | 28.12.2024 | Project with Swagger for Nata |
-| [UserService](https://github.com/Nata-Practices/UserService) | C# | 2672 | 31 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
-| [APIGateway](https://github.com/Nata-Practices/APIGateway) | C# | 1937 | 21 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
-| [drugstore](https://github.com/Nata-Practices/drugstore) | Kotlin | 1430 | 43 | 28.12.2024 | Simple mobile app with sorting and searching |
-| [infproc](https://github.com/Nata-Practices/infproc) | Python | 916 | 15 | 27.12.2024 | Graph project for Nata |
-| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | Java | 829 | 15 | 28.12.2024 | Data management practices |
+| Репозиторий | Язык (Иконка) | Строк кода | Файлов | Последний коммит | Описание |
+|-------------|---------------|------------|--------|------------------|----------|
+| [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | <img src="https://img.shields.io/badge/-000?logo=c-sharp&logoColor=white&style=flat-square" alt="C#"> C# | 12295 | 45 | 28.12.2024 | Project with Swagger for Nata |
+| [UserService](https://github.com/Nata-Practices/UserService) | <img src="https://img.shields.io/badge/-000?logo=c-sharp&logoColor=white&style=flat-square" alt="C#"> C# | 2672 | 31 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
+| [APIGateway](https://github.com/Nata-Practices/APIGateway) | <img src="https://img.shields.io/badge/-000?logo=c-sharp&logoColor=white&style=flat-square" alt="C#"> C# | 1937 | 21 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
+| [drugstore](https://github.com/Nata-Practices/drugstore) | <img src="https://img.shields.io/badge/-000?logo=kotlin&logoColor=white&style=flat-square" alt="Kotlin"> Kotlin | 1430 | 43 | 28.12.2024 | Simple mobile app with sorting and searching |
+| [infproc](https://github.com/Nata-Practices/infproc) | <img src="https://img.shields.io/badge/-000?logo=python&logoColor=white&style=flat-square" alt="Python"> Python | 916 | 15 | 27.12.2024 | Graph project for Nata |
+| [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | <img src="https://img.shields.io/badge/-000?logo=openjdk&logoColor=white&style=flat-square" alt="Java"> Java | 829 | 15 | 28.12.2024 | Data management practices |
