@@ -34,9 +34,6 @@ readme_template = """
   <img src="https://img.shields.io/badge/Последняя_активность-{last_activity}-brightgreen" alt="Last Activity" />
 </p>
 
-## 🌐 Языки
-{languages_section}
-
 <hr/>
 
 ## 📂 Репозитории
@@ -51,22 +48,6 @@ language_icons = {
     "Java": '<img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java">',
     "N/A": '<img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown">'
 }
-
-
-# Форматирование таблицы языков
-def format_languages_table(_languages: dict) -> str:
-    if not _languages:
-        return "_Нет данных по языкам_"
-
-    header = "| Язык         | Кол-во байт |\n|--------------|-------------|\n"
-    rows = []
-
-    for _lang, _size in _languages.items():
-        icon = language_icons.get(_lang, language_icons["N/A"])
-        rows.append(f"| {icon} | {_size} |")
-
-    return header + "\n".join(rows)
-
 
 # Форматирование таблицы репозиториев
 def format_repos_table(_repos_info: list) -> str:
@@ -193,7 +174,6 @@ for repo in org.get_repos(type="private"):
 repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
 
 # Формируем итоговый Markdown
-languages_section = format_languages_table(languages)
 repositories_section = format_repos_table(repos_info)
 
 output_text = readme_template.format(
@@ -205,7 +185,6 @@ output_text = readme_template.format(
     total_contributors=len(all_contributors),
     active_contributors=len(active_contributors),
     last_activity=last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y"),
-    languages_section=languages_section,
     repositories_section=repositories_section
 )
 
