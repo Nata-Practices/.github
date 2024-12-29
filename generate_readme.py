@@ -6,6 +6,9 @@ from github import Github
 from shutil import which
 import sys
 from datetime import datetime
+from pytz import timezone
+
+moscow_tz = timezone("Europe/Moscow")
 
 if not which("cloc"):
     sys.exit("cloc не установлен или не найден в PATH")
@@ -90,8 +93,8 @@ for repo in org.get_repos(type="private"):
 
     # Обновляем последнюю активность
     if not last_activity or repo.updated_at > last_activity:
-        last_activity = repo.updated_at
-
+        last_activity = repo.updated_at.astimezone(moscow_tz).strftime("%d.%m.%Y")
+    
     # Клонируем репо в temp
     with tempfile.TemporaryDirectory() as tmpdirname:
         repo_dir = os.path.join(tmpdirname, repo_name)
@@ -164,7 +167,7 @@ output_text = readme_template.format(
     total_storage=round(total_storage, 2),
     total_contributors=len(all_contributors),
     active_contributors=len(active_contributors),
-    last_activity=last_activity.strftime("%d-%m-%Y"),
+    last_activity=last_activity,
     languages_section=languages_section,
     repositories_section=repositories_section
 )
