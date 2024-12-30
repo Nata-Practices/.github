@@ -1,13 +1,13 @@
 <h1 align="center">👋 Добро пожаловать в <strong>Nata-Practices</strong>!</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Репозиториев-6-blue" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Строк_кода-6158-brightgreen" alt="Total Lines" />
-  <img src="https://img.shields.io/badge/Файлов-106-yellow" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Репозиториев-7-blue" alt="Repo Count" />
+  <img src="https://img.shields.io/badge/Строк_кода-6166-brightgreen" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Файлов-107-yellow" alt="Total Files" />
   <img src="https://img.shields.io/badge/Объем_хранилища-1.39MB-purple" alt="Total Storage" />
   <img src="https://img.shields.io/badge/Контрибьюторы-2-orange" alt="Contributors" />
   <img src="https://img.shields.io/badge/Активных_участников-1-red" alt="Active Contributors" />
-  <img src="https://img.shields.io/badge/Последняя_активность-29.12.2024-brightgreen" alt="Last Activity" />
+  <img src="https://img.shields.io/badge/Последняя_активность-30.12.2024-brightgreen" alt="Last Activity" />
 </p>
 
 | Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
@@ -18,3 +18,4 @@
 | [Kotlin-Task-Collection](https://github.com/Nata-Practices/Kotlin-Task-Collection) | <img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java"> | 727 | 11 | 28.12.2024 | Data management practices |
 | [UserService](https://github.com/Nata-Practices/UserService) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 687 | 17 | 28.12.2024 | Microservice for Nata's SwaggerAPI project |
 | [APIGateway](https://github.com/Nata-Practices/APIGateway) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 147 | 7 | 28.12.2024 | Gateway for two microservices UserService and SwaggerAPI |
+| [Prolog](https://github.com/Nata-Practices/Prolog) | <img src="https://starbeamrainbowlabs.com/images/logos/swi-prolog.svg" height="20" alt="Prolog"> | 8 | 1 | 30.12.2024 | Simple bullshit on Prolog |
