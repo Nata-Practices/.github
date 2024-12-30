@@ -42,6 +42,7 @@ language_icons = {
     "C#": '<img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#">',
     "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin">',
     "Java": '<img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java">',
+    "Prolog": '<img src="https://starbeamrainbowlabs.com/images/logos/swi-prolog.svg" height="20" alt="Prolog">',
     "N/A": '<img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown">'
 }
 
