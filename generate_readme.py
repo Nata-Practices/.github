@@ -43,6 +43,7 @@ language_icons = {
     "Kotlin": '<img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin">',
     "Java": '<img src="https://cdn.simpleicons.org/openjdk?viewbox=auto" height="20" alt="Java">',
     "Prolog": '<img src="https://starbeamrainbowlabs.com/images/logos/swi-prolog.svg" height="20" alt="Prolog">',
+    "Lua": '<img src="https://cdn.simpleicons.org/lua?viewbox=auto" height="20" alt="Lua">',
     "N/A": '<img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown">'
 }
 
