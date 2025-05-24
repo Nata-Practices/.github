@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/Репозиториев-8-blue" alt="Repo Count" />
   <img src="https://img.shields.io/badge/Строк_кода-7207-brightgreen" alt="Total Lines" />
   <img src="https://img.shields.io/badge/Файлов-118-yellow" alt="Total Files" />
-  <img src="https://img.shields.io/badge/Объем_хранилища-1.44MB-purple" alt="Total Storage" />
+  <img src="https://img.shields.io/badge/Объем_хранилища-1.83MB-purple" alt="Total Storage" />
   <img src="https://img.shields.io/badge/Контрибьюторы-2-orange" alt="Contributors" />
   <img src="https://img.shields.io/badge/Активных_участников-1-red" alt="Active Contributors" />
   <img src="https://img.shields.io/badge/Последняя_активность-24.05.2025-brightgreen" alt="Last Activity" />
