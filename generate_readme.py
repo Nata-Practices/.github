@@ -47,17 +47,17 @@ language_icons = {
     "N/A": '<img src="https://cdn.simpleicons.org/c#?viewbox=auto" height="20" alt="Unknown">'
 }
 
-# Форматирование таблицы репозиториев
 def format_repos_table(_repos_info: list) -> str:
     if not _repos_info:
         return "_Нет репозиториев_"
-
-    header = "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
-    header += "|-------------|---------------|------------|--------|------------------|----------|\n"
+    header = (
+        "| Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |\n"
+        "|-------------|------|------------|--------|------------------|----------|"
+    )
     rows = []
     for r in _repos_info:
         icon = language_icons.get(r['language'], language_icons["N/A"])
-        row = (
+        rows.append(
             f"| [{r['name']}]({r['html_url']}) "
             f"| {icon} "
             f"| {r['lines']} "
@@ -65,116 +65,89 @@ def format_repos_table(_repos_info: list) -> str:
             f"| {r['last_commit']} "
             f"| {r['description']} |"
         )
-        rows.append(row)
-
-    return header + "\n".join(rows)
+    return header + "\n" + "\n".join(rows)
 
 
-# Основная логика
+# Сбор статистики
 repo_count = 0
-languages = {}
 total_lines = 0
 total_files = 0
-repos_info = []
 total_storage = 0
 last_activity = None
 all_contributors = set()
 active_contributors = set()
-doc_coverage = 0
+repos_info = []
 
-for repo in org.get_repos(type="private"):
-    repo_name = repo.name
-
-    # Пропускаем, если нужно
-    if repo_name == ".github-private":
+for repo in org.get_repos(type="all"):
+    name = repo.name
+    if name.startswith(".github"):
         continue
 
     repo_count += 1
-    total_storage += repo.size / 1024  # Перевод размера в MB
+    total_storage += repo.size / 1024  # KB → MB
 
-    # Обновляем последнюю активность
     if not last_activity or repo.updated_at > last_activity:
         last_activity = repo.updated_at
 
-    # Получение даты последнего коммита
     try:
-        last_commit_date = repo.get_commits()[0].commit.committer.date
-        last_commit_date = last_commit_date.astimezone(moscow_tz).strftime("%d.%m.%Y")
+        date = repo.get_commits()[0].commit.committer.date
+        last_commit = date.astimezone(moscow_tz).strftime("%d.%m.%Y")
     except:
-        last_commit_date = "Нет данных"
+        last_commit = "Нет данных"
 
-    # Клонируем репо в temp
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        repo_dir = os.path.join(tmpdirname, repo_name)
-        clone_url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
-
-        clone_result = subprocess.run(
-            ["git", "clone", "--depth", "1", clone_url, repo_dir],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
-
-        if clone_result.returncode != 0:
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, name)
+        url = repo.clone_url.replace("https://", f"https://{GITHUB_TOKEN}@")
+        if subprocess.run(["git","clone","--depth","1",url,path],
+                          stdout=subprocess.DEVNULL,
+                          stderr=subprocess.DEVNULL).returncode != 0:
             continue
 
         try:
-            lines_output = subprocess.run(
-                [
-                    "cloc",
-                    repo_dir,
-                    "--json",
-                    "--exclude-dir=.venv,__pycache__,.idea,.gradle,build",
-                    "--exclude-ext=gradle,pro,json,md,gitignore,cache,props,targets,bat,properties,editorconfig,Up2Date,"
-                    "props"
-                ],
-                capture_output=True,
-                text=True
+            out = subprocess.run(
+                ["cloc", path, "--json",
+                 "--exclude-dir=.venv,__pycache__,.idea,.gradle,build",
+                 "--exclude-ext=gradle,pro,json,md,gitignore,cache,props,targets,bat,properties,editorconfig,Up2Date,props"],
+                capture_output=True, text=True
             ).stdout
-            if lines_output.strip():
-                cloc_data = json.loads(lines_output)
-                total_lines_repo = cloc_data.get("SUM", {}).get("code", 0)
-                total_files_repo = cloc_data.get("SUM", {}).get("nFiles", 0)
-            else:
-                total_lines_repo = 0
-                total_files_repo = 0
-
-            total_lines += total_lines_repo
-            total_files += total_files_repo
-
+            data = json.loads(out) if out.strip() else {}
+            lines = data.get("SUM", {}).get("code", 0)
+            files = data.get("SUM", {}).get("nFiles", 0)
         except:
-            total_lines_repo = 0
-            total_files_repo = 0
+            lines = files = 0
 
-    # Язык
-    primary_lang = repo.language or "N/A"
+    total_lines += lines
+    total_files += files
 
-    # Сбор языков
-    repo_langs = repo.get_languages()
-    for lang, size in repo_langs.items():
-        languages[lang] = languages.get(lang, 0) + size
+    # Язык и контрибьюторы
+    lang = repo.language or "N/A"
+    for l, sz in repo.get_languages().items():
+        pass  # можно накопить, если нужно
 
-    # Сбор контрибьюторов
-    for contributor in repo.get_contributors():
-        all_contributors.add(contributor.login)
-        if contributor.contributions > 10:
-            active_contributors.add(contributor.login)
+    for contrib in repo.get_contributors():
+        all_contributors.add(contrib.login)
+        if contrib.contributions > 10:
+            active_contributors.add(contrib.login)
 
-    # Добавляем описание и дату последнего коммита
     repos_info.append({
-        "name": repo_name,
+        "name": name,
         "html_url": repo.html_url,
-        "language": primary_lang,
-        "lines": total_lines_repo,
-        "files": total_files_repo,
+        "language": lang,
+        "lines": lines,
+        "files": files,
         "description": repo.description or "Описание отсутствует",
-        "last_commit": last_commit_date
+        "last_commit": last_commit
     })
 
 repos_info = sorted(repos_info, key=lambda r: r['lines'], reverse=True)
-
-# Формируем итоговый Markdown
 repositories_section = format_repos_table(repos_info)
 
-output_text = readme_template.format(
+if last_activity:
+    last_activity_str = last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y")
+else:
+    last_activity_str = "Нет данных"
+
+output = readme_template.format(
     org_name=ORG_NAME,
     repo_count=repo_count,
     total_lines=total_lines,
@@ -182,13 +155,12 @@ output_text = readme_template.format(
     total_storage=round(total_storage, 2),
     total_contributors=len(all_contributors),
     active_contributors=len(active_contributors),
-    last_activity=last_activity.astimezone(moscow_tz).strftime("%d.%m.%Y"),
+    last_activity=last_activity_str,
     repositories_section=repositories_section
 )
 
 os.makedirs("profile", exist_ok=True)
-output_path = os.path.join("profile", "README.md")
-with open(output_path, "w", encoding="utf-8") as f:
-    f.write(output_text)
+with open("profile/README.md", "w", encoding="utf-8") as f:
+    f.write(output)
 
 print("README.md обновлён!")
