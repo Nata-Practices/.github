@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Объем_хранилища-1.83MB-purple" alt="Total Storage" />
   <img src="https://img.shields.io/badge/Контрибьюторы-2-orange" alt="Contributors" />
   <img src="https://img.shields.io/badge/Активных_участников-1-red" alt="Active Contributors" />
-  <img src="https://img.shields.io/badge/Последняя_активность-24.05.2025-brightgreen" alt="Last Activity" />
+  <img src="https://img.shields.io/badge/Последняя_активность-28.06.2025-brightgreen" alt="Last Activity" />
 </p>
 
 | Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
