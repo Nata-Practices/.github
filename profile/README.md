@@ -1,9 +1,9 @@
 <h1 align="center">👋 Добро пожаловать в <strong>Nata-Practices</strong>!</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Репозиториев-8-blue" alt="Repo Count" />
-  <img src="https://img.shields.io/badge/Строк_кода-7207-brightgreen" alt="Total Lines" />
-  <img src="https://img.shields.io/badge/Файлов-118-yellow" alt="Total Files" />
+  <img src="https://img.shields.io/badge/Репозиториев-9-blue" alt="Repo Count" />
+  <img src="https://img.shields.io/badge/Строк_кода-14451-brightgreen" alt="Total Lines" />
+  <img src="https://img.shields.io/badge/Файлов-171-yellow" alt="Total Files" />
   <img src="https://img.shields.io/badge/Объем_хранилища-1.83MB-purple" alt="Total Storage" />
   <img src="https://img.shields.io/badge/Контрибьюторы-2-orange" alt="Contributors" />
   <img src="https://img.shields.io/badge/Активных_участников-1-red" alt="Active Contributors" />
@@ -11,7 +11,8 @@
 </p>
 
 | Репозиторий | Язык | Строк кода | Файлов | Последний коммит | Описание |
-|-------------|---------------|------------|--------|------------------|----------|
+|-------------|------|------------|--------|------------------|----------|
+| [StudentFVTBot](https://github.com/Nata-Practices/StudentFVTBot) | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 7244 | 53 | 28.06.2025 | A comprehensive learning process management system that combines a Telegram bot and a web-based administration panel. |
 | [SwaggerAPI](https://github.com/Nata-Practices/SwaggerAPI) | <img src="https://img.shields.io/badge/C%23-0?color=9b4993" height="20" alt="C#"> | 2686 | 26 | 28.12.2024 | Project with Swagger for Nata |
 | [infproc](https://github.com/Nata-Practices/infproc) | <img src="https://cdn.simpleicons.org/python?viewbox=auto" height="20" alt="Python"> | 1215 | 12 | 24.05.2025 | Graph project |
 | [drugstore](https://github.com/Nata-Practices/drugstore) | <img src="https://cdn.simpleicons.org/kotlin?viewbox=auto" height="20" alt="Kotlin"> | 1106 | 34 | 22.04.2025 | Simple mobile app with sorting and searching |
